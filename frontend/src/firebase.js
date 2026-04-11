@@ -2,13 +2,13 @@ import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyDgBNmFpbtR5Wb7dHVOftlXle-HNfJD0dU",
-    authDomain: "librobot-ec2cf.firebaseapp.com",
-    projectId: "librobot-ec2cf",
-    storageBucket: "librobot-ec2cf.firebasestorage.app",
-    messagingSenderId: "268272991532",
-    appId: "1:268272991532:web:f4239b06bdfbdbe725c089",
-    measurementId: "G-1PY0KZN4GP"
+    apiKey: "YOUR_API_KEY",
+    authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+    projectId: "YOUR_PROJECT_ID",
+    storageBucket: "YOUR_PROJECT_ID.firebasestorage.app",
+    messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+    appId: "YOUR_APP_ID",
+    measurementId: "YOUR_MEASUREMENT_ID"
 };
 
 const app = initializeApp(firebaseConfig);

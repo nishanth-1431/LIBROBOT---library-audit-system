@@ -12,12 +12,37 @@ dist/
 # Env versions
 .env
 .env.local
+.env.*
 
-# IDE
+# IDE & OS Junk
 .idea/
 .vscode/
+.DS_Store
+Thumbs.db
 
-# Ignore backups
+# Logs & Temp
+*.log
+frontend/build_err.txt
+frontend/build_err_utf8.txt
+database_dump.txt
+report_toc.md
+
+# Backups & Redundant Folders
 *_backup.zip
 *.zip
 *.bak
+resources - Copy/
+
+# Project Data (Real data excluded, sample data allowed)
+data/*.xlsx
+data/*.csv
+data/books_database_backup.xlsx
+!data/books_database_sample.xlsx
+!data/shelf_map.json
+
+# Large Documents (Keep diagrams for README)
+resources/*.pdf
+resources/*.docx
+resources/*.jpeg
+resources/mini js 123_removed.pdf
+
