@@ -1,0 +1,39 @@
+{
+    "name": "libro-bot-frontend",
+    "private": true,
+    "version": "0.0.0",
+    "type": "module",
+    "scripts": {
+        "dev": "vite",
+        "build": "vite build",
+        "preview": "vite preview"
+    },
+    "dependencies": {
+        "@heroicons/react": "^2.2.0",
+        "axios": "^1.13.6",
+        "clsx": "^2.1.1",
+        "dom-to-image": "^2.6.0",
+        "firebase": "^12.10.0",
+        "framer-motion": "^12.34.3",
+        "jsbarcode": "^3.12.3",
+        "jspdf": "^4.2.0",
+        "lucide-react": "^0.575.0",
+        "react": "^18.2.0",
+        "react-barcode": "^1.6.1",
+        "react-dom": "^18.2.0",
+        "react-router-dom": "^6.30.3",
+        "recharts": "^3.8.0",
+        "socket.io-client": "^4.8.3",
+        "tailwind-merge": "^3.5.0",
+        "use-sound": "^5.0.0"
+    },
+    "devDependencies": {
+        "@types/react": "^18.2.66",
+        "@types/react-dom": "^18.2.22",
+        "@vitejs/plugin-react": "^4.2.1",
+        "autoprefixer": "^10.4.24",
+        "postcss": "^8.5.6",
+        "tailwindcss": "^3.4.19",
+        "vite": "^5.2.0"
+    }
+}

@@ -1,0 +1,117 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Default Dark - Professional Slate */
+  --background-rgb: 15 23 42;
+  --surface-rgb: 30 41 59;
+  --sidebar-rgb: 2 6 23;
+  --header-rgb: 15 23 42;
+  --primary-rgb: 14 165 233;
+  --primary-dark-rgb: 2 132 199;
+  --success-rgb: 16 185 129;
+  --warning-rgb: 245 158 11;
+  --danger-rgb: 239 68 68;
+  --border-rgb: 51 65 85;
+  --text-main-rgb: 248 250 252;
+  --text-dim-rgb: 148 163 184;
+
+  /* Legacy aliases for standard CSS */
+  --background: rgb(var(--background-rgb));
+  --surface: rgb(var(--surface-rgb));
+  --sidebar: rgb(var(--sidebar-rgb));
+  --header: rgba(var(--header-rgb), 0.8);
+  --primary: rgb(var(--primary-rgb));
+  --text-main: rgb(var(--text-main-rgb));
+  --text-dim: rgb(var(--text-dim-rgb));
+  --border: rgb(var(--border-rgb));
+  --danger: rgb(var(--danger-rgb));
+  --success: rgb(var(--success-rgb));
+}
+
+[data-theme='light'] {
+  --background-rgb: 241 245 249;
+  --surface-rgb: 255 255 255;
+  --sidebar-rgb: 248 250 252;
+  --header-rgb: 255 255 255;
+  --primary-rgb: 2 132 199;
+  --text-main-rgb: 15 23 42;
+  --text-dim-rgb: 71 85 105;
+  --border-rgb: 203 213 225;
+}
+
+@layer base {
+  body {
+    background-color: var(--background);
+    color: var(--text-dim);
+    @apply font-sans antialiased overflow-x-hidden;
+  }
+}
+
+@layer components {
+  .glass-panel {
+    @apply bg-surface bg-opacity-80 backdrop-blur-md border border-border border-opacity-50 shadow-lg rounded-xl;
+  }
+}
+
+/* Custom Scrollbar - Premium Global Styling */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(var(--background-rgb), 0.5);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(var(--border-rgb), 0.8);
+  border-radius: 20px;
+  border: 3px solid transparent;
+  background-clip: content-box;
+  transition: all 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(var(--primary-rgb), 0.6);
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+/* Custom Scrollbar specifically for inner panels */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(var(--border-rgb), 0.4);
+  border-radius: 20px;
+  transition: all 0.3s ease;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(var(--primary-rgb), 0.5);
+}
+
+/* Global Selection and Focus */
+::selection {
+  background: rgba(var(--primary-rgb), 0.2);
+  color: var(--primary);
+}
+
+:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* Glass panel refinement */
+@layer components {
+  .glass-panel {
+    @apply bg-surface bg-opacity-70 backdrop-blur-xl border border-border border-opacity-40 shadow-[0_8px_32px_rgba(0,0,0,0.2)] rounded-2xl transition-all duration-300;
+  }
+}
