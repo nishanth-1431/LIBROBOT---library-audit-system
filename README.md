@@ -1,4 +1,4 @@
-# Libro-Bot — Smart Library Inventory Auditing Robot
+# Libro-Bot — Smart Library Auditing Robot
 
 **Libro-Bot** is an automated robot designed to revolutionize library inventory management. It scans library shelves rack by rack, reads barcodes using a high-precision vision system, and flags missing or misplaced books on a live web dashboard. The entire system is built to be practical, scalable, and cost-effective for modern libraries.
 
@@ -10,10 +10,7 @@
 
 ## 🛠️ Tech Stack
 ### Hardware
-- Rover Chassis
-- Raspberry Pi (Main Controller)
-- Arduino (Motor/Sensor Interface)
-- USB Webcam
+ in devlopment!!
 
 ### Software
 - **Backend**: Python, Flask, OpenCV, PyZbar
@@ -36,4 +33,4 @@
 3. **Run**: Use `Start_Libro_Bot.bat` to launch the backend server and frontend application simultaneously.
 
 ---
-*Developed by Nishanth and the Libro-Bot Team.*
+*Developed by Nishanth
