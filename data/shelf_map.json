@@ -1,14 +1,14 @@
 {
-    "General": "A1",
+    "Chemistry": "H3",
     "Civil Engineering": "B1",
     "Computer Science": "C1",
     "Electrical Engineering": "D1",
-    "Mechanical Engineering": "E1",
     "Electronics": "F1",
-    "Information Technology": "G1",
-    "Mathematics": "H1",
-    "Physics": "H2",
-    "Chemistry": "H3",
     "English": "I1",
-    "Management": "J1"
+    "General": "A1",
+    "Information Technology": "G1",
+    "Management": "J1",
+    "Mathematics": "H1",
+    "Mechanical Engineering": "E1",
+    "Physics": "H2"
 }
