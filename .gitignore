@@ -20,6 +20,12 @@ dist/
 .DS_Store
 Thumbs.db
 
+# MSME Proposal docs (large binaries, not code)
+msme/
+
+# Old status report (contains leaked env values, superseded by docs/PROJECT_STATUS.md)
+PROJECT_STATUS_END_TO_END.md
+
 # Logs & Temp
 *.log
 frontend/build_err.txt
