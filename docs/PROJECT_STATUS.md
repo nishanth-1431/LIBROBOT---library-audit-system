@@ -33,12 +33,12 @@ Next prompt to run: Phase 1: Task 1 — Spring Boot Core Project Generation
 
 ## 2. Git state
 
-- Working branch: `librobot2.0` `13dc789`, pushed to origin: **pending push**
+- Working branch: `librobot2.0` `6492bc1`, pushed to origin: **yes**
 - Protected hashes (confirmed unchanged: **yes**):
   - `main`: `d57f3f7a50f8243d1cd5c2eded2620817cf6fd4d`
   - `backup/pre-migration-20261101`: `b80f00561967e0a99430c82f53d4b7f83d410e6f`
   - tag `v2.0-flask-final`: `b0f03d18329d0ca77695f104236b74156a3e5475` (points to commit `b80f005...`)
-- Phase tags created: none yet (`phase-0-complete` pending)
+- Phase tags created: `phase-0-complete` (points to `6492bc1`)
 - Open `task/*` branches: none
 
 ## 3. System as it exists right now
