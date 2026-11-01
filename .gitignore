@@ -17,6 +17,8 @@ dist/
 .env
 .env.local
 .env.*
+!.env.example
+!**/.env.example
 
 # IDE & OS Junk
 .idea/
