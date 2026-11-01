@@ -1,5 +1,5 @@
 # Libro-Bot — Project Status (end to end)
-Last updated: 2026-11-01 00:55 IST
+Last updated: 2026-11-01 10:25 IST
 Current branch: librobot2.0
 Last prompt completed: First-Run Procedure (LIBROBOT_SUPER_PROMPT.md Section 4.2)
 Next prompt to run: Prompt 0.1 (Phase 0 — legacy behaviour documentation)
@@ -123,6 +123,7 @@ All pages currently talk to the **legacy Flask backend** at `http://127.0.0.1:50
 4. **No automated tests** anywhere in the project.
 5. **CORS is fully open** (`CORS(app)` with `cors_allowed_origins="*"`).
 6. **No HTTPS** — everything runs on plain HTTP locally.
+7. Firebase web API key present in git history (frontend/src/firebase.js, commit 236732f, removed in ead4c29). No private key found. Action for Nishanth: restrict key, review Firebase rules, delete demo user. Do not rewrite history.
 
 ## 12. Decisions (ADRs)
 
