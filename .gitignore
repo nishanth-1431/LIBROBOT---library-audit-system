@@ -2,6 +2,10 @@
 node_modules/
 backend/venv/
 backend/__pycache__/
+legacy/backend/venv/
+legacy/backend/__pycache__/
+**/venv/
+**/__pycache__/
 *.pyc
 
 # Builds
@@ -45,6 +49,11 @@ data/*.csv
 data/books_database_backup.xlsx
 !data/books_database_sample.xlsx
 !data/shelf_map.json
+legacy/data/*.xlsx
+legacy/data/*.csv
+legacy/data/books_database_backup.xlsx
+!legacy/data/books_database_sample.xlsx
+!legacy/data/shelf_map.json
 
 # Large Documents (Keep diagrams for README)
 resources/*.pdf
