@@ -8,6 +8,13 @@
 - **Misplacement Detection**: Automatically identifies books that are on the wrong shelves based on the central database.
 - **Inventory Sync**: Seamless integration with Excel-based library databases for easy management.
 
+## 🔄 How It Works
+1. **Live Camera Feed:** Optical camera captures real-time video of shelf book spines.
+2. **Barcode Decoding:** PyZbar decodes barcodes on each spine as the cart moves along the rack.
+3. **Database Verification:** Each barcode is verified against catalog records in real time.
+4. **Classification:** Books are classified as Available, Missing, Misplaced, or Safely Issued.
+5. **Real-time Push:** Status updates and misplacement alerts are pushed via WebSockets to the dashboard.
+
 ## 🛠️ Tech Stack
 ### Hardware
 - Custom scanning cart with high-resolution USB optical camera module
