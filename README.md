@@ -36,9 +36,12 @@
 - `data/`: Contains database schemas and sample inventory datasets.
 
 ## ⚙️ Quick Start
-1. **Prerequisites**: Ensure you have Python 3.8+ and Node.js installed.
+1. **Prerequisites**: Ensure you have Python 3.8+ and Node.js (16+) installed.
 2. **Setup**: Run `setup.bat` to automatically install all dependencies for both backend and frontend.
-3. **Run**: Use `Start_Libro_Bot.bat` to launch the backend server and frontend application simultaneously.
+3. **Run**: Double-click `Start_Libro_Bot.bat` to launch both servers simultaneously:
+   - **Frontend UI:** `http://localhost:3000`
+   - **Backend API:** `http://localhost:5000`
+4. **Audit**: Open the Live Dashboard, choose a target shelf, and begin scanning books.
 
 ---
 *Developed by Nishanth P*
