@@ -41,7 +41,7 @@ echo.
 
 :: Setup Backend
 echo [4/4] Setting up Backend dependencies...
-cd backend
+cd legacy\backend
 if not exist "venv" (
     echo Creating Python virtual environment...
     python -m venv venv

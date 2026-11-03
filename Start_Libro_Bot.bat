@@ -8,7 +8,7 @@ echo ========================================================
 echo.
 
 echo [+] Starting Python AI Vision Backend Server...
-start "LIBRO-BOT Backend Server" cmd /k "cd /d %~dp0backend && venv\Scripts\python.exe app.py"
+start "LIBRO-BOT Backend Server" cmd /k "cd /d %~dp0legacy\backend && venv\Scripts\python.exe app.py"
 
 echo [+] Starting React Frontend UI Server...
 start "LIBRO-BOT Frontend Server" cmd /k "cd /d %~dp0frontend && npm run dev"

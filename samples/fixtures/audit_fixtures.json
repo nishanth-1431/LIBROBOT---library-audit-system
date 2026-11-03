@@ -1,0 +1,141 @@
+{
+  "description": "Comprehensive characterization test fixtures for Libro-Bot classification engine (derived from legacy/backend/app.py:build_status)",
+  "schema": ["Barcode", "Book Name", "Author", "Department", "Status", "Shelf"],
+  "sample_books_catalog": [
+    { "barcode": "CS-101", "name": "Introduction to Algorithms", "author": "Cormen et al.", "department": "Computer Science", "status": "Available", "shelf": "C1" },
+    { "barcode": "CS-102", "name": "Clean Code", "author": "Robert C. Martin", "department": "Computer Science", "status": "Available", "shelf": "C1" },
+    { "barcode": "CS-103", "name": "Design Patterns", "author": "Gang of Four", "department": "Computer Science", "status": "Issued", "shelf": "C1" },
+    { "barcode": "CS-104", "name": "Operating System Concepts", "author": "Silberschatz", "department": "Computer Science", "status": "Available", "shelf": "C1" },
+    { "barcode": "CS-105", "name": "Database System Concepts", "author": "Korth", "department": "Computer Science", "status": "Issued", "shelf": "C1" },
+    { "barcode": "IT-201", "name": "Computer Networks", "author": "Tanenbaum", "department": "Information Technology", "status": "Available", "shelf": "G1" },
+    { "barcode": "IT-202", "name": "Cloud Computing Architecture", "author": "Thomas Erl", "department": "Information Technology", "status": "Available", "shelf": "G1" },
+    { "barcode": "IT-203", "name": "Web Technologies", "author": "Achyut Godbole", "department": "Information Technology", "status": "Issued", "shelf": "G1" },
+    { "barcode": "EC-301", "name": "Microelectronic Circuits", "author": "Sedra & Smith", "department": "Electronics", "status": "Available", "shelf": "F1" },
+    { "barcode": "EC-302", "name": "Digital Signal Processing", "author": "Proakis", "department": "Electronics", "status": "Available", "shelf": "F1" },
+    { "barcode": "EC-303", "name": "Electromagnetic Waves", "author": "Shevgaonkar", "department": "Electronics", "status": "Issued", "shelf": "F1" },
+    { "barcode": "EE-401", "name": "Electric Machinery Fundamentals", "author": "Stephen Chapman", "department": "Electrical Engineering", "status": "Available", "shelf": "D1" },
+    { "barcode": "EE-402", "name": "Power System Analysis", "author": "Hadi Saadat", "department": "Electrical Engineering", "status": "Available", "shelf": "D1" },
+    { "barcode": "EE-403", "name": "Control Systems Engineering", "author": "Norman Nise", "department": "Electrical Engineering", "status": "Issued", "shelf": "D1" },
+    { "barcode": "ME-501", "name": "Thermodynamics: An Engineering Approach", "author": "Yunus Cengel", "department": "Mechanical Engineering", "status": "Available", "shelf": "E1" },
+    { "barcode": "ME-502", "name": "Fluid Mechanics", "author": "Frank White", "department": "Mechanical Engineering", "status": "Available", "shelf": "E1" },
+    { "barcode": "ME-503", "name": "Theory of Machines", "author": "S.S. Rattan", "department": "Mechanical Engineering", "status": "Issued", "shelf": "E1" },
+    { "barcode": "CE-601", "name": "Strength of Materials", "author": "R.K. Rajput", "department": "Civil Engineering", "status": "Available", "shelf": "B1" },
+    { "barcode": "CE-602", "name": "Surveying Vol. 1", "author": "B.C. Punmia", "department": "Civil Engineering", "status": "Available", "shelf": "B1" },
+    { "barcode": "CE-603", "name": "Structural Analysis", "author": "R.C. Hibbeler", "department": "Civil Engineering", "status": "Issued", "shelf": "B1" },
+    { "barcode": "MA-701", "name": "Advanced Engineering Mathematics", "author": "Erwin Kreyszig", "department": "Mathematics", "status": "Available", "shelf": "H1" },
+    { "barcode": "MA-702", "name": "Linear Algebra and Its Applications", "author": "Gilbert Strang", "department": "Mathematics", "status": "Available", "shelf": "H1" },
+    { "barcode": "MA-703", "name": "Probability and Statistics", "author": "Sheldon Ross", "department": "Mathematics", "status": "Issued", "shelf": "H1" },
+    { "barcode": "PH-801", "name": "Concepts of Modern Physics", "author": "Arthur Beiser", "department": "Physics", "status": "Available", "shelf": "H2" },
+    { "barcode": "PH-802", "name": "Optics", "author": "Eugene Hecht", "department": "Physics", "status": "Available", "shelf": "H2" },
+    { "barcode": "CH-901", "name": "Engineering Chemistry", "author": "Jain & Jain", "department": "Chemistry", "status": "Available", "shelf": "H3" },
+    { "barcode": "EN-001", "name": "English Grammar in Use", "author": "Raymond Murphy", "department": "English", "status": "Available", "shelf": "I1" },
+    { "barcode": "MG-001", "name": "Principles of Management", "author": "Peter Drucker", "department": "Management", "status": "Available", "shelf": "J1" },
+    { "barcode": "GN-001", "name": "The Design of Everyday Things", "author": "Don Norman", "department": "General", "status": "Available", "shelf": "A1" },
+    { "barcode": "GN-002", "name": "Thinking, Fast and Slow", "author": "Daniel Kahneman", "department": "General", "status": "Available", "shelf": "A1" }
+  ],
+  "test_scenarios": [
+    {
+      "scenario_id": "SCENARIO_1_PERFECT_SHELF_AUDIT",
+      "name": "Perfect Single Shelf Audit (Target: C1)",
+      "description": "Audit targets shelf C1. All available books on C1 are scanned. Issued book CS-103 and CS-105 are not scanned (safely issued). Books on other shelves are ignored.",
+      "input": {
+        "target_shelf": "C1",
+        "scanned_events": ["CS-101", "CS-102", "CS-104"]
+      },
+      "expected_classification": {
+        "available": ["CS-101", "CS-102", "CS-104"],
+        "missing": [],
+        "safely_issued": ["CS-103", "CS-105"],
+        "misplaced": []
+      }
+    },
+    {
+      "scenario_id": "SCENARIO_2_SHELF_AUDIT_WITH_MISPLACED_AND_MISSING",
+      "name": "Shelf Audit with Misplaced Book from Other Shelf (Target: C1)",
+      "description": "Audit targets shelf C1. CS-101 is found. CS-102 and CS-104 are missing. EC-301 (registered on F1) is physically found on C1 (misplaced). Issued books remain safely issued.",
+      "input": {
+        "target_shelf": "C1",
+        "scanned_events": ["CS-101", "EC-301"]
+      },
+      "expected_classification": {
+        "available": ["CS-101"],
+        "missing": ["CS-102", "CS-104"],
+        "safely_issued": ["CS-103", "CS-105"],
+        "misplaced": [
+          {
+            "barcode": "EC-301",
+            "name": "Microelectronic Circuits",
+            "shelf": "F1",
+            "found_on_shelf": "C1"
+          }
+        ]
+      }
+    },
+    {
+      "scenario_id": "SCENARIO_3_UNCATALOGED_BARCODE",
+      "name": "Audit with Uncataloged/Unknown Barcodes (Target: C1)",
+      "description": "Scanned barcode 'GUEST-99999' does not exist anywhere in the catalog. It must be classified as misplaced with shelf 'Unknown' and found_on_shelf 'C1'.",
+      "input": {
+        "target_shelf": "C1",
+        "scanned_events": ["CS-101", "GUEST-99999"]
+      },
+      "expected_classification": {
+        "available": ["CS-101"],
+        "missing": ["CS-102", "CS-104"],
+        "safely_issued": ["CS-103", "CS-105"],
+        "misplaced": [
+          {
+            "barcode": "GUEST-99999",
+            "name": "Unknown Book",
+            "shelf": "Unknown",
+            "found_on_shelf": "C1"
+          }
+        ]
+      }
+    },
+    {
+      "scenario_id": "SCENARIO_4_DUPLICATE_SCAN_IDEMPOTENCY",
+      "name": "Duplicate Scans of the Same Barcode in One Audit Session",
+      "description": "Camera worker repeatedly scans CS-101 five times and EC-301 three times. The classification and result set must deduplicate; each book appears exactly once in the respective bucket.",
+      "input": {
+        "target_shelf": "C1",
+        "scanned_events": ["CS-101", "CS-101", "CS-101", "EC-301", "CS-101", "EC-301", "EC-301"]
+      },
+      "expected_classification": {
+        "available": ["CS-101"],
+        "missing": ["CS-102", "CS-104"],
+        "safely_issued": ["CS-103", "CS-105"],
+        "misplaced": [
+          {
+            "barcode": "EC-301",
+            "shelf": "F1",
+            "found_on_shelf": "C1"
+          }
+        ]
+      }
+    },
+    {
+      "scenario_id": "SCENARIO_5_NO_TARGET_SHELF_WHOLE_LIBRARY",
+      "name": "Whole Library Audit (target_shelf: null)",
+      "description": "Legacy build_status() behavior when target_shelf is null: Any scanned cataloged book is marked 'available' (even if physically on another shelf). All unscanned cataloged books are evaluated globally: if status is Issued -> safely_issued; if status is Available -> missing. Any unscanned book is NEVER misplaced. Uncataloged barcodes remain misplaced with found_on_shelf 'Unknown'.",
+      "input": {
+        "target_shelf": null,
+        "scanned_events": ["CS-101", "IT-201", "ME-501", "UNREGISTERED-888"]
+      },
+      "expected_classification": {
+        "available": ["CS-101", "IT-201", "ME-501"],
+        "safely_issued": ["CS-103", "CS-105", "IT-203", "EC-303", "EE-403", "ME-503", "CE-603", "MA-703"],
+        "missing_count": 19,
+        "missing_sample": ["CS-102", "CS-104", "IT-202", "EC-301", "EC-302", "EE-401", "EE-402", "ME-502", "CE-601", "CE-602", "MA-701", "MA-702", "PH-801", "PH-802", "CH-901", "EN-001", "MG-001", "GN-001", "GN-002"],
+        "misplaced": [
+          {
+            "barcode": "UNREGISTERED-888",
+            "name": "Unknown Book",
+            "shelf": "Unknown",
+            "found_on_shelf": "Unknown"
+          }
+        ]
+      }
+    }
+  ]
+}

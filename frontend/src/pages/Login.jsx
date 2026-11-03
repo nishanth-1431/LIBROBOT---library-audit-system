@@ -22,10 +22,10 @@ export default function Login() {
             // DEV ONLY BYPASS: Enabled only when explicitly configured via environment variable
             // WARNING: Insecure - do not enable in production environments.
             const isDevLoginEnabled = import.meta.env.VITE_ENABLE_DEV_LOGIN === 'true';
-            const devEmail = import.meta.env.VITE_DEV_ADMIN_EMAIL || 'admin@librobot.com';
-            const devPassword = import.meta.env.VITE_DEV_ADMIN_PASSWORD || 'admin123';
+            const devEmail = import.meta.env.VITE_DEV_ADMIN_EMAIL;
+            const devPassword = import.meta.env.VITE_DEV_ADMIN_PASSWORD;
 
-            if (isDevLoginEnabled && email === devEmail && password === devPassword) {
+            if (isDevLoginEnabled && devEmail && devPassword && email === devEmail && password === devPassword) {
                 await mockLogin(email);
                 navigate('/admin');
                 setLoading(false);
