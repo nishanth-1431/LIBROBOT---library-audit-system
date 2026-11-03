@@ -10,7 +10,8 @@
 
 ## 🛠️ Tech Stack
 ### Hardware
- in devlopment!!
+- Custom scanning cart with high-resolution USB optical camera module
+- High-speed barcode scanning & real-time frame capture
 
 ### Software
 - **Backend**: Python, Flask, OpenCV, PyZbar
@@ -33,4 +34,4 @@
 3. **Run**: Use `Start_Libro_Bot.bat` to launch the backend server and frontend application simultaneously.
 
 ---
-*Developed by Nishanth
+*Developed by Nishanth P*
