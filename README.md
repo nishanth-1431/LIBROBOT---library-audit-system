@@ -15,6 +15,17 @@
 4. **Classification:** Books are classified as Available, Missing, Misplaced, or Safely Issued.
 5. **Real-time Push:** Status updates and misplacement alerts are pushed via WebSockets to the dashboard.
 
+## 📐 Architecture Overview
+```text
+[Camera Feed] ---> [PyZbar Decoder] ---> [Verification Engine]
+                                                |
+                   +----------------------------+
+                   |                            |
+            [Database Sync]             [WebSocket Push]
+             (Catalog DB)                       |
+                                        [React Dashboard]
+```
+
 ## 🛠️ Tech Stack
 ### Hardware
 - Custom scanning cart with high-resolution USB optical camera module
