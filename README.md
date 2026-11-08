@@ -8,9 +8,36 @@
 - **Misplacement Detection**: Automatically identifies books that are on the wrong shelves based on the central database.
 - **Inventory Sync**: Seamless integration with Excel-based library databases for easy management.
 
+## 🔄 How It Works
+1. **Live Camera Feed:** Optical camera captures real-time video of shelf book spines.
+2. **Barcode Decoding:** PyZbar decodes barcodes on each spine as the cart moves along the rack.
+3. **Database Verification:** Each barcode is verified against catalog records in real time.
+4. **Classification:** Books are classified as Available, Missing, Misplaced, or Safely Issued.
+5. **Real-time Push:** Status updates and misplacement alerts are pushed via WebSockets to the dashboard.
+
+## 📐 Architecture Overview
+```text
+[Camera Feed] ---> [PyZbar Decoder] ---> [Verification Engine]
+                                                |
+                   +----------------------------+
+                   |                            |
+            [Database Sync]             [WebSocket Push]
+             (Catalog DB)                       |
+                                        [React Dashboard]
+```
+
+## 📋 Audit Classification
+| Status | Condition |
+| :--- | :--- |
+| **Available** | Book scanned on its assigned target shelf |
+| **Misplaced** | Book scanned on a different shelf than registered in database |
+| **Missing** | Book registered as available on shelf, but not scanned |
+| **Safely Issued** | Book registered as borrowed / issued to a library member |
+
 ## 🛠️ Tech Stack
 ### Hardware
- in devlopment!!
+- Custom scanning cart with high-resolution USB optical camera module
+- High-speed barcode scanning & real-time frame capture
 
 ### Software
 - **Backend**: Python, Flask, OpenCV, PyZbar
@@ -28,9 +55,12 @@
 - `data/`: Contains database schemas and sample inventory datasets.
 
 ## ⚙️ Quick Start
-1. **Prerequisites**: Ensure you have Python 3.8+ and Node.js installed.
+1. **Prerequisites**: Ensure you have Python 3.8+ and Node.js (16+) installed.
 2. **Setup**: Run `setup.bat` to automatically install all dependencies for both backend and frontend.
-3. **Run**: Use `Start_Libro_Bot.bat` to launch the backend server and frontend application simultaneously.
+3. **Run**: Double-click `Start_Libro_Bot.bat` to launch both servers simultaneously:
+   - **Frontend UI:** `http://localhost:3000`
+   - **Backend API:** `http://localhost:5000`
+4. **Audit**: Open the Live Dashboard, choose a target shelf, and begin scanning books.
 
 ---
-*Developed by Nishanth
+*Developed by Nishanth P*
