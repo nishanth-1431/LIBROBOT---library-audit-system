@@ -26,6 +26,14 @@
                                         [React Dashboard]
 ```
 
+## 📋 Audit Classification
+| Status | Condition |
+| :--- | :--- |
+| **Available** | Book scanned on its assigned target shelf |
+| **Misplaced** | Book scanned on a different shelf than registered in database |
+| **Missing** | Book registered as available on shelf, but not scanned |
+| **Safely Issued** | Book registered as borrowed / issued to a library member |
+
 ## 🛠️ Tech Stack
 ### Hardware
 - Custom scanning cart with high-resolution USB optical camera module
