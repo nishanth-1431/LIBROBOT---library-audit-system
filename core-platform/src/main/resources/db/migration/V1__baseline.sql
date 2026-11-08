@@ -14,3 +14,4 @@ CREATE TABLE IF NOT EXISTS tenants (
 INSERT INTO tenants (id, name, slug, status)
 VALUES ('default-tenant', 'SREC Central Library', 'srec-central', 'ACTIVE')
 ON DUPLICATE KEY UPDATE name = VALUES(name);
+

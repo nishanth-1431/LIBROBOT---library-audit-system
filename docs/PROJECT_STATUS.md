@@ -1,7 +1,7 @@
 # Libro-Bot — Project Status (end to end)
-Last updated: 2026-11-08 21:30 IST
+Last updated: 2026-11-08 23:05 IST
 Current branch: librobot2.0
-Last prompt completed: Prompt 1.1 — Spring Boot Core Generation & Monorepo Scaffolding (Java 21, Spring Boot 3.4.3)
+Last prompt completed: Prompt 1.1 Corrections — Spring Boot 4.x Migration & Monorepo Scaffolding (Java 17, Spring Boot 4.0.0)
 Next prompt to run: Prompt 1.2 — Flyway Migrations for Core Tables
 
 ## 1. Overall progress
@@ -14,7 +14,7 @@ Next prompt to run: Prompt 1.2 — Flyway Migrations for Core Tables
   - [x] Remove hard-coded demo credentials from tracked files; `git grep` clean — VERIFIED
   - [x] Fix `Start_Libro_Bot.bat` and `setup.bat` to reference `legacy/backend/` — VERIFIED
 - [ ] **Phase 1: Spring Boot core, parity without vision** — IN PROGRESS
-  - [x] 1. Generate project (Web, Validation, Data JPA, MySQL 8, Flyway, Actuator, OpenAPI) — IMPLEMENTED BUT NOT VERIFIED
+  - [x] 1. Generate project (WebMVC, Validation, Data JPA, MySQL 8, Flyway, Actuator, OpenAPI) — IMPLEMENTED BUT RUNTIME VERIFICATION NOT VERIFIED (Docker daemon stopped)
   - [ ] 2. Flyway migrations for core tables (single default tenant) — PLANNED
   - [ ] 3. Inventory module: Book CRUD, bulk delete, shelf map endpoints — PLANNED
   - [ ] 4. Import/export with Apache POI: auto-matching, deduplication, backup, undo — PLANNED
@@ -38,14 +38,14 @@ Next prompt to run: Prompt 1.2 — Flyway Migrations for Core Tables
 - Protected hashes:
   - `backup/pre-migration-20261101`: `b80f00561967e0a99430c82f53d4b7f83d410e6f` (confirmed unchanged: **yes**)
   - tag `v2.0-flask-final`: `b0f03d18329d0ca77695f104236b74156a3e5475` (confirmed unchanged: **yes**)
-  - `main`: `27e6983` (updated on main by Nishanth for documentation)
+  - `origin/main`: `27e69830a645da9d5d56ea8d4951f0653c36ca5e` (confirmed unchanged: **yes**)
 - Phase tags created: `phase-0-complete`, `phase-0-verified`
 - Open `task/*` branches: none
 
 ## 3. System as it exists right now
 
 The repository is structured as a **monorepo**:
-- `core-platform/` — Spring Boot application (Java 21, Spring Boot 3.4.3, Maven wrapper `mvnw`, baseline Flyway migration).
+- `core-platform/` — Spring Boot 4.0.0 application (Java 17 baseline matching installed JDK `17.0.17`, Maven wrapper `mvnw`, baseline Flyway migration).
 - `vision-service/` — FastAPI edge vision service skeleton (README present, implementation in Phase 2).
 - `landing/` — SaaS marketing site skeleton (README present, implementation in Phase 8).
 - `legacy/backend/` — Original Flask backend preserved read-only for behavior parity.
@@ -56,15 +56,15 @@ The repository is structured as a **monorepo**:
 ### Services and ports
 | Service | Tech | Port | How to start | Status |
 |:---|:---|:---|:---|:---|
-| Core Platform | Spring Boot 3.4.3 + Java 21 | `8080` | `cd core-platform && .\mvnw.cmd spring-boot:run` | IMPLEMENTED BUT NOT VERIFIED |
-| Database | MySQL 8.0 (Docker) | `3306` | `docker compose up -d` | IMPLEMENTED BUT NOT VERIFIED |
+| Core Platform | Spring Boot 4.0.0 + Java 17 | `8080` | `cd core-platform && .\mvnw.cmd spring-boot:run` | NOT VERIFIED (blocked on MySQL) |
+| Database | MySQL 8.0 (Docker) | `3306` | `docker compose up -d` | NOT VERIFIED (Docker Desktop stopped) |
 | Legacy Backend | Python Flask + Socket.IO + Eventlet | `5000` | `cd legacy/backend && venv\Scripts\python.exe app.py` | VERIFIED |
 | Frontend | React 18 + Vite | `3000` | `cd frontend && npm run dev` | VERIFIED |
 
 ## 4. Core platform (Spring Boot)
 
-- **Framework:** Spring Boot 3.4.3
-- **Language Target:** Java 21 LTS
+- **Framework:** Spring Boot 4.0.0 (Spring Framework 7, Jakarta EE 11)
+- **Language Target:** Java 17 LTS (aligned with installed OpenJDK 17.0.17)
 - **Build Tool:** Apache Maven with committed Maven wrapper (`mvnw`, `mvnw.cmd`, `.mvn/`)
 - **Modules (`com.librobot` with `package-info.java`):**
   - `common`: Shared exceptions, Problem Details handlers, global DTOs
@@ -124,9 +124,10 @@ All pages currently talk to legacy Flask backend at `http://127.0.0.1:5000`. Fro
 
 ## 11. Known issues, shortcuts and risks
 
-1. **Local JDK is Java 17:** Local machine has Java 17 installed (`C:\Program Files\Java\jdk-17`). Compiling with Java 21 target (`<java.version>21</java.version>`) produced: `error: release version 21 not supported`. JDK 21 must be installed to run and compile `core-platform`.
-2. **Docker Desktop Engine Stopped:** Running `docker compose up -d` returned: `open //./pipe/dockerDesktopLinuxEngine: The system cannot find the file specified`. Docker Desktop service needs to be launched.
-3. Firebase web API key in git history (action for Nishanth: restrict in Google Cloud Console).
+1. **Docker Desktop Engine Stopped on Host:** Running `docker compose up -d` / `docker-compose up -d` fails with: `open //./pipe/docker_engine: The system cannot find the file specified`. MySQL 8 cannot start until the user starts Docker Desktop.
+2. **Runtime Verification Pending Docker:** Since MySQL is offline, the Spring Boot application cannot run its Flyway baseline or expose `/actuator/health` and Swagger UI. Marked **NOT VERIFIED**.
+3. **Local JDK is 17.0.17:** Configured `pom.xml` with `<java.version>17</java.version>` matching the installed JDK. Spring Boot 4 baseline requires Java 17+.
+4. Firebase web API key in git history (action for Nishanth: restrict in Google Cloud Console).
 
 ## 12. Decisions (ADRs)
 
@@ -144,13 +145,15 @@ All pages currently talk to legacy Flask backend at `http://127.0.0.1:5000`. Fro
 
 | Date | Command run | Result summary |
 |:---|:---|:---|
-| 2026-11-08 | `git tag -a phase-0-verified` | Tagged and pushed to origin |
+| 2026-11-08 | `git tag -a phase-0-verified` | Tagged and pushed to origin (b2c0a17) |
 | 2026-11-08 | `mvn -N wrapper:wrapper` | Generated Maven wrapper in `core-platform/` (Maven 3.9.16) |
-| 2026-11-08 | `docker compose up -d` | FAILED: Docker Desktop daemon not running (open //./pipe/dockerDesktopLinuxEngine: not found) |
-| 2026-11-08 | `.\mvnw.cmd compile` | FAILED: Local JDK is 17; error: `release version 21 not supported` |
+| 2026-11-08 | `docker compose up -d` | FAILED: `open //./pipe/docker_engine: The system cannot find the file specified` (NOT VERIFIED) |
+| 2026-11-08 | `docker-compose up -d` | FAILED: `open //./pipe/docker_engine: The system cannot find the file specified` (NOT VERIFIED) |
+| 2026-11-08 | `/actuator/health` check | NOT VERIFIED (blocked on MySQL container startup) |
+| 2026-11-08 | Swagger UI check | NOT VERIFIED (blocked on MySQL container startup) |
 
 ## Changelog (newest first)
 
-- 2026-11-08 | Prompt 1.1: Core Platform Generation | Generated `core-platform` with Spring Boot 3.4.3, Java 21, committed Maven wrapper, 8 module `package-info.java` files, `application.yml` (open-in-view: false), `V1__baseline.sql`, `docker-compose.yml`, and root `.env.example`. Tested verification commands and recorded results under honest protocol.
-- 2026-11-08 | Milestone Tag | Tagged and pushed `phase-0-verified`.
-- 2026-11-03 | Phase 0: Verification & Remediation | Created scaffolding, ADR 0002, 30-book fixtures, sanitized credentials, and updated legacy scripts.
+- 2026-11-08 | Prompt 1.1 Corrections: Upgraded to Spring Boot 4.0.0 (Spring Framework 7, Jakarta EE 11), aligned Java baseline to 17 to match installed JDK `17.0.17`, configured modular `spring-boot-starter-webmvc`, integrated `springdoc-openapi-starter-webmvc-ui:3.0.0`, documented merge rationale for commit `c903bd9`, and executed verification commands reporting honest NOT VERIFIED status due to inactive Docker daemon.
+- 2026-11-08 | Milestone Tag: Tagged and pushed `phase-0-verified`.
+- 2026-11-03 | Phase 0: Verification & Remediation: Created scaffolding, ADR 0002, 30-book fixtures, sanitized credentials, and updated legacy scripts.
