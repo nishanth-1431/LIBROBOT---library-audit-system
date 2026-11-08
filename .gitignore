@@ -12,6 +12,8 @@ legacy/backend/__pycache__/
 frontend/dist/
 build/
 dist/
+target/
+**/target/
 
 # Env versions
 .env
