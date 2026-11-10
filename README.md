@@ -42,7 +42,8 @@
 ### Software
 - **Backend**: Python, Flask, OpenCV, PyZbar
 - **Frontend**: React, Socket.io, Recharts, Tailwind CSS
-- **Database**: Excel-synced synchronized inventory
+- **Database**: Excel-backed library catalog inventory
+- **Reports & Exports**: Automated `.docx` audit reports and `.xlsx` / `.csv` inventory sync
 
 ## 🏆 Achievements
 - 🥇 **1st Prize** — UDHIYAM'26, KIT Coimbatore
