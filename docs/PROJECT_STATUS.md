@@ -1,5 +1,5 @@
 # Libro-Bot — Project Status (end to end)
-Last updated: 2026-11-08 23:30 IST
+Last updated: 2026-11-10 23:51 IST
 Current branch: librobot2.0
 Last prompt completed: Prompt 1.2 — Flyway Migrations for Core Tables & JPA Entities
 Next prompt to run: Prompt 1.3 — Inventory Module: Book CRUD, Bulk Delete, Shelf Map Endpoints
@@ -39,7 +39,7 @@ Next prompt to run: Prompt 1.3 — Inventory Module: Book CRUD, Bulk Delete, She
   - `backup/pre-migration-20261101`: `b80f00561967e0a99430c82f53d4b7f83d410e6f` (confirmed unchanged: **yes**)
   - tag `v2.0-flask-final`: `b0f03d18329d0ca77695f104236b74156a3e5475` (confirmed unchanged: **yes**)
   - `origin/main` (original): `d57f3f70e8b15d0ecfcbf51600f6ee4a8525b6a7`
-  - `origin/main` (current): `27e69830a645da9d5d56ea8d4951f0653c36ca5e` (5 README documentation commits pushed by Nishanth directly to main; AI did not touch main)
+  - `origin/main` (current): `506341250c27f6e72dddf7ac090128df280acd62` (5 README documentation commits previously pushed by Nishanth, plus README clarification commit `5063412` requested explicitly by Nishanth on 2026-11-10)
 - Phase tags created: `phase-0-complete`, `phase-0-verified`
 - Open `task/*` branches: none
 
@@ -156,6 +156,7 @@ All pages currently talk to legacy Flask backend at `http://127.0.0.1:5000`. Fro
 
 ## Changelog (newest first)
 
+- 2026-11-10 | Docs sync: Updated `core-platform/README.md` to reflect Spring Boot 4.1.2 / Flyway / Testcontainers stack on `librobot2.0`, and clarified database/report formats in root `README.md` on `main` per Nishanth's request.
 - 2026-11-08 | Prompt 1.2: Core Flyway Migrations & JPA Entities: Created Flyway migrations V2 through V6 (InnoDB, utf8mb4, utf8mb4_bin barcode collation, cross-service CHAR(36) IDs, internal BIGINT IDs, tenant partitioning), authored full JPA entity model (`Tenant`, `Shelf`, `Book`, `AuditSession`, `ScanEvent`, `ImportJob`), created `SchemaValidationTest.java` with Testcontainers, and documented ddl-auto=validate rationale.
 - 2026-11-08 | Quick fix: Upgraded to Spring Boot 4.1.2 with dedicated `spring-boot-starter-flyway` and Testcontainers starters.
 - 2026-11-08 | Prompt 1.1 Corrections: Upgraded to Spring Boot 4.x, Java 17 baseline, documented merge commit c903bd9, and established honest verification reporting.
