@@ -1,8 +1,8 @@
 # Libro-Bot — Project Status (end to end)
-Last updated: 2026-11-10 23:51 IST
+Last updated: 2026-11-14 19:30 IST
 Current branch: librobot2.0
-Last prompt completed: Prompt 1.2 — Flyway Migrations for Core Tables & JPA Entities
-Next prompt to run: Prompt 1.3 — Inventory Module: Book CRUD, Bulk Delete, Shelf Map Endpoints
+Last prompt completed: Prompt 1.3 — Inventory Module: Book CRUD, Bulk Delete, and RFC 7807 Error Handling
+Next prompt to run: Prompt 1.4 — Import/Export with Apache POI: Auto-matching, Deduplication, Backup, Undo
 
 ## 1. Overall progress
 
@@ -16,7 +16,7 @@ Next prompt to run: Prompt 1.3 — Inventory Module: Book CRUD, Bulk Delete, She
 - [ ] **Phase 1: Spring Boot core, parity without vision** — IN PROGRESS
   - [x] 1. Generate project (WebMVC, Validation, Data JPA, MySQL 8, Flyway, Actuator, OpenAPI) — IMPLEMENTED
   - [x] 2. Flyway migrations for core tables (books, shelves, audit_sessions, scan_events, import_jobs) & JPA entities — IMPLEMENTED (TESTCONTAINERS RUN: NOT VERIFIED PENDING DOCKER)
-  - [ ] 3. Inventory module: Book CRUD, bulk delete, shelf map endpoints — PLANNED
+  - [x] 3. Inventory module: Book CRUD, bulk delete, search/pagination, RFC 7807 problem details — IMPLEMENTED (TESTCONTAINERS RUN: NOT VERIFIED PENDING DOCKER)
   - [ ] 4. Import/export with Apache POI: auto-matching, deduplication, backup, undo — PLANNED
   - [ ] 5. Audit module: sessions, scan-event ingestion, classification service ported from legacy — PLANNED
   - [ ] 6. Reports module: Word audit report (.docx) matching legacy structure — PLANNED
@@ -156,6 +156,7 @@ All pages currently talk to legacy Flask backend at `http://127.0.0.1:5000`. Fro
 
 ## Changelog (newest first)
 
+- 2026-11-14 | Prompt 1.3: Inventory Module & Book REST Endpoints: Implemented BookController, BookService, BookRepository with tenant filtering via TenantContext, immutable DTO records with Bean Validation, BookMapper, BookSpecifications, RFC 7807 GlobalExceptionHandler (409 Conflict for duplicate barcodes, 404 Not Found), unit tests (BookServiceTest), and Testcontainers integration tests (BookControllerIntegrationTest).
 - 2026-11-10 | Docs sync: Updated `core-platform/README.md` to reflect Spring Boot 4.1.2 / Flyway / Testcontainers stack on `librobot2.0`, and clarified database/report formats in root `README.md` on `main` per Nishanth's request.
 - 2026-11-08 | Prompt 1.2: Core Flyway Migrations & JPA Entities: Created Flyway migrations V2 through V6 (InnoDB, utf8mb4, utf8mb4_bin barcode collation, cross-service CHAR(36) IDs, internal BIGINT IDs, tenant partitioning), authored full JPA entity model (`Tenant`, `Shelf`, `Book`, `AuditSession`, `ScanEvent`, `ImportJob`), created `SchemaValidationTest.java` with Testcontainers, and documented ddl-auto=validate rationale.
 - 2026-11-08 | Quick fix: Upgraded to Spring Boot 4.1.2 with dedicated `spring-boot-starter-flyway` and Testcontainers starters.
